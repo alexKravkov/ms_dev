@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  ms_with_rabbit:
+    build:
+      context: ./ms_with_rabbit
+    container_name: ms_with_rabbit
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBIT_BROKER__URL=amqp://guest:guest@rabbitmq:5672/
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ms_with_rabbit:/app  # dev hot reload optional
+
+  ms_with_aiogram:
+    build:
+      context: ./ms_with_aiogram
+    container_name: ms_with_aiogram
+    depends_on:
+      - rabbitmq
+    env_file:
+      - ./ms_with_aiogram/.env
+    environment:
+      - RABBIT_BROKER__URL=amqp://guest:guest@rabbitmq:5672/
+    volumes:
+      - ./ms_with_aiogram:/app
