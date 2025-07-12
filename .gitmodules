@@ -1,0 +1,6 @@
+[submodule "ms_with_rabbit"]
+	path = ms_with_rabbit
+	url = https://github.com/alexKravkov/ms_with_rabbit.git
+[submodule "ms_with_aiogram"]
+	path = ms_with_aiogram
+	url = https://github.com/alexKravkov/ms_with_aiogram.git
