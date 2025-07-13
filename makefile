@@ -17,6 +17,9 @@ build: ## Build all Docker containers
 up: pull build ## Pull, build, and start all containers
 	@docker compose up
 
+run: pull build ## Pull, build, and start all containers in detached mode
+	@docker compose up -d
+
 down: ## Stop and remove containers, networks, volumes
 	@docker compose down
 

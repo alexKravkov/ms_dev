@@ -15,8 +15,10 @@ services:
     container_name: ms_with_rabbit
     depends_on:
       - rabbitmq
+    env_file:
+      - ./ms_with_rabbit/.env
     environment:
-      - RABBIT_BROKER__URL=amqp://guest:guest@rabbitmq:5672/
+      - RABBIT_BROKER_URL=amqp://guest:guest@rabbitmq:5672/
     ports:
       - "8000:8000"
     volumes:
@@ -31,6 +33,6 @@ services:
     env_file:
       - ./ms_with_aiogram/.env
     environment:
-      - RABBIT_BROKER__URL=amqp://guest:guest@rabbitmq:5672/
+      - RABBIT_BROKER_URL=amqp://guest:guest@rabbitmq:5672/
     volumes:
       - ./ms_with_aiogram:/app
